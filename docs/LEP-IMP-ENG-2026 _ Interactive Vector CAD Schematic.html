@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)file:///C:/Users/ASUS/Downloads/gemini-code-1785465523649.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEP-IMP-ENG-2026 | Interactive Vector CAD Schematic</title>
+    <style>
+        :root {
+            --cad-bg: #050b14;
+            --cad-grid: rgba(20, 184, 166, 0.08);
+            --cad-border: #1e293b;
+            --accent-gold: #d4af37;
+            --accent-teal: #14b8a6;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --text-light: #f8fafc;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background-color: var(--cad-bg);
+            color: var(--text-light);
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .cad-frame {
+            border: 2px solid var(--accent-gold);
+            background-color: var(--cad-bg);
+            background-image: 
+                linear-gradient(var(--cad-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--cad-grid) 1px, transparent 1px);
+            background-size: 20px 20px;
+            padding: 24px;
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .cad-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        .cad-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            letter-spacing: 1.5px;
+        }
+
+        .cad-subtitle {
+            font-size: 0.9rem;
+            color: var(--accent-teal);
+        }
+
+        .control-panel {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 12px 18px;
+            border: 1px solid var(--cad-border);
+            border-radius: 4px;
+        }
+
+        .ctrl-btn {
+            background: transparent;
+            border: 1px solid var(--accent-teal);
+            color: var(--accent-teal);
+            padding: 8px 16px;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .ctrl-btn.active, .ctrl-btn:hover {
+            background: var(--accent-teal);
+            color: var(--cad-bg);
+            box-shadow: 0 0 10px rgba(20, 184, 166, 0.4);
+        }
+
+        .mode-indicator {
+            margin-left: auto;
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            border: 1px solid var(--cad-border);
+            background: rgba(2, 6, 23, 0.5);
+        }
+
+        /* CAD Drawing Elements */
+        .building-outline { stroke: var(--accent-gold); stroke-width: 3; fill: none; }
+        .pod-divider { stroke: var(--accent-teal); stroke-width: 2; stroke-dasharray: 6 4; }
+        .pipe-supply { stroke: var(--accent-red); stroke-width: 3; fill: none; }
+        .pipe-return { stroke: var(--accent-blue); stroke-width: 3; fill: none; }
+        .hydronic-loop { stroke: #f59e0b; stroke-width: 1.5; fill: none; opacity: 0.7; }
+
+        .label-title { fill: var(--accent-gold); font-size: 14px; font-weight: bold; }
+        .label-sub { fill: #94a3b8; font-size: 11px; }
+        .label-val { fill: var(--accent-teal); font-size: 12px; font-weight: bold; }
+        .label-temp { fill: #f43f5e; font-size: 14px; font-weight: bold; }
+        .label-green { fill: var(--accent-green); font-size: 12px; font-weight: bold; }
+
+        .cad-footer-table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
+        .cad-footer-table td, .cad-footer-table th {
+            border: 1px solid var(--accent-gold);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .cad-footer-table th {
+            background-color: rgba(212, 175, 55, 0.1);
+            color: var(--accent-gold);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cad-frame">
+        <div class="cad-header">
+            <div>
+                <div class="cad-title">LEP-IMP-ENG-2026 // HYDRONIC BROODING THERMAL VECTOR SCHEMATIC (-DWG)</div>
+                <div class="cad-subtitle">384 m² Facility (4 × 96 m² Pods) | SCADA Integrated Thermal &amp; Microgrid Layout</div>
+            </div>
+            <div style="text-align: right;">
+                <span style="color: var(--accent-green); font-weight: bold;">[SCAPUSH PRECISION ACTIVATED]</span><br>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">REV: 4.0 - 2.0kg Standard</span>
+            </div>
+        </div>
+
+        <div class="control-panel">
+            <span>OPERATIONAL MODE VIEW:</span>
+            <button class="ctrl-btn active" id="btnStaggered" onclick="setMode(&#39;staggered&#39;)">STRATEGY 1: STAGGERED ROTATION</button>
+            <button class="ctrl-btn" id="btnBatch" onclick="setMode(&#39;batch&#39;)">STRATEGY 2: ALL-IN / ALL-OUT BATCH</button>
+            <div class="mode-indicator" id="modeDisplay">ACTIVE MODE: STRATEGY 1 - STAGGERED HARVEST ENGINE (CONTINUOUS REVENUE)</div>
+        </div>
+
+        <!-- VECTOR CAD DIAGRAM (SVG) -->
+        <svg viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg">
+            <!-- Grid Background Lines -->
+            <defs>
+                <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(20,184,166,0.05)" stroke-width="0.5"></path>
+                </pattern>
+            </defs>
+            <rect width="1000" height="460" fill="url(#smallGrid)"></rect>
+
+            <!-- CHP Thermal Energy Storage (TES) Source Engine -->
+            <rect x="20" y="160" width="100" height="140" fill="rgba(239, 68, 68, 0.1)" stroke="var(--accent-red)" stroke-width="2"></rect>
+            <text x="70" y="190" text-anchor="middle" class="label-title" fill="var(--accent-red)">CHP / TES</text>
+            <text x="70" y="210" text-anchor="middle" class="label-sub">Hydronic Manifold</text>
+            <text x="70" y="230" text-anchor="middle" class="label-val">Supply: 65.0°C</text>
+            <text x="70" y="250" text-anchor="middle" class="label-sub" fill="var(--accent-blue)">Return: 45.0°C</text>
+            <circle cx="70" cy="275" r="10" fill="none" stroke="var(--accent-gold)" stroke-width="2"></circle>
+            <text x="70" y="279" text-anchor="middle" fill="var(--accent-gold)" font-size="10">P1</text>
+
+            <!-- Main Supply Header Pipe (Red) -->
+            <path d="M 120 200 L 920 200" class="pipe-supply"></path>
+            <!-- Main Return Header Pipe (Blue) -->
+            <path d="M 920 260 L 120 260" class="pipe-return"></path>
+
+            <!-- 384m² Main Building Envelope -->
+            <rect x="160" y="40" width="780" height="380" class="building-outline"></rect>
+            <text x="550" y="65" text-anchor="middle" class="label-title">384 m² BIO-SOLAR MICROGRID BUILDING (12m × 32m)</text>
+
+            <!-- POD 1 -->
+            <g id="pod1">
+                <rect x="170" y="80" width="175" height="320" fill="rgba(16, 185, 129, 0.05)" stroke="var(--cad-border)"></rect>
+                <line x1="355" y1="80" x2="355" y2="400" class="pod-divider"></line>
+                <!-- Hydronic Loop -->
+                <path d="M 190 200 L 190 350 L 335 350 L 335 260" class="hydronic-loop"></path>
+                <text x="262" y="105" text-anchor="middle" class="label-title">POD 1 (96 m²)</text>
+                <text x="262" y="130" text-anchor="middle" class="label-temp" id="p1-temp">33.5°C</text>
+                <text x="262" y="155" text-anchor="middle" class="label-val" id="p1-age">Wk 1-2 (Chicks)</text>
+                <text x="262" y="175" text-anchor="middle" class="label-sub" id="p1-birds">1,440 Birds (0.05-0.5kg)</text>
+                <text x="262" y="380" text-anchor="middle" class="label-green" id="p1-density">Density: 2.2 kg/m²</text>
+            </g>
+
+            <!-- POD 2 -->
+            <g id="pod2">
+                <rect x="365" y="80" width="175" height="320" fill="rgba(20, 184, 166, 0.05)" stroke="var(--cad-border)"></rect>
+                <line x1="550" y1="80" x2="550" y2="400" class="pod-divider"></line>
+                <!-- Hydronic Loop -->
+                <path d="M 385 200 L 385 350 L 530 350 L 530 260" class="hydronic-loop"></path>
+                <text x="457" y="105" text-anchor="middle" class="label-title">POD 2 (96 m²)</text>
+                <text x="457" y="130" text-anchor="middle" class="label-temp" id="p2-temp">26.0°C</text>
+                <text x="457" y="155" text-anchor="middle" class="label-val" id="p2-age">Wk 3-4 (Growing)</text>
+                <text x="457" y="175" text-anchor="middle" class="label-sub" id="p2-birds">1,440 Birds (0.6-1.2kg)</text>
+                <text x="457" y="380" text-anchor="middle" class="label-green" id="p2-density">Density: 12.5 kg/m²</text>
+            </g>
+
+            <!-- POD 3 -->
+            <g id="pod3">
+                <rect x="560" y="80" width="175" height="320" fill="rgba(59, 130, 246, 0.05)" stroke="var(--cad-border)"></rect>
+                <line x1="745" y1="80" x2="745" y2="400" class="pod-divider"></line>
+                <!-- Hydronic Loop -->
+                <path d="M 580 200 L 580 350 L 725 350 L 725 260" class="hydronic-loop"></path>
+                <text x="652" y="105" text-anchor="middle" class="label-title">POD 3 (96 m²)</text>
+                <text x="652" y="130" text-anchor="middle" class="label-temp" id="p3-temp">22.0°C</text>
+                <text x="652" y="155" text-anchor="middle" class="label-val" id="p3-age">Wk 4-5 (Maturing)</text>
+                <text x="652" y="175" text-anchor="middle" class="label-sub" id="p3-birds">1,440 Birds (1.2-1.6kg)</text>
+                <text x="652" y="380" text-anchor="middle" class="label-green" id="p3-density">Density: 21.0 kg/m²</text>
+            </g>
+
+            <!-- POD 4 -->
+            <g id="pod4">
+                <rect x="755" y="80" width="175" height="320" fill="rgba(212, 175, 55, 0.05)" stroke="var(--cad-border)"></rect>
+                <!-- Hydronic Loop -->
+                <path d="M 775 200 L 775 350 L 920 350 L 920 260" class="hydronic-loop"></path>
+                <text x="842" y="105" text-anchor="middle" class="label-title">POD 4 (96 m²)</text>
+                <text x="842" y="130" text-anchor="middle" class="label-temp" id="p4-temp">19.0°C</text>
+                <text x="842" y="155" text-anchor="middle" class="label-val" id="p4-age" fill="var(--accent-gold)">Wk 5-6 (HARVEST)</text>
+                <text x="842" y="175" text-anchor="middle" class="label-sub" id="p4-birds">1,440 Birds @ 2.0kg Target</text>
+                <text x="842" y="380" text-anchor="middle" class="label-green" id="p4-density">Density: 30.0 kg/m² MAX</text>
+            </g>
+
+            <!-- Mixing Valve Nodes -->
+            <circle cx="190" cy="200" r="6" fill="var(--accent-red)"></circle>
+            <circle cx="385" cy="200" r="6" fill="var(--accent-red)"></circle>
+            <circle cx="580" cy="200" r="6" fill="var(--accent-red)"></circle>
+            <circle cx="775" cy="200" r="6" fill="var(--accent-red)"></circle>
+
+            <circle cx="335" cy="260" r="6" fill="var(--accent-blue)"></circle>
+            <circle cx="530" cy="260" r="6" fill="var(--accent-blue)"></circle>
+            <circle cx="725" cy="260" r="6" fill="var(--accent-blue)"></circle>
+            <circle cx="920" cy="260" r="6" fill="var(--accent-blue)"></circle>
+        </svg>
+
+        <!-- TITLE BLOCK / ENGINEERING METRIC TABLE -->
+        <table class="cad-footer-table">
+            <thead>
+                <tr>
+                    <th>PROJECT: SCAPUSH PRECISION microgrid</th>
+                    <th>DRAWING NO: LEP-IMP-ENG-2026-DWG</th>
+                    <th>TOTAL STANDING CAPACITY: 5,760 BIRDS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Building Dimensions:</strong> 384 m² (12m × 32m)</td>
+                    <td><strong>Pod Configuration:</strong> 4 × 96 m² Independent Pods</td>
+                    <td><strong>Max Standing Mass:</strong> 11,520 kg (@ 2.0kg harvest)</td>
+                </tr>
+                <tr>
+                    <td><strong>Hydronic Heat Source:</strong> CHP Bio-Solar Manifold (65°C)</td>
+                    <td><strong>SCADA Mixing Loops:</strong> 4 Independent Mixing Valves</td>
+                    <td><strong>Target Bio-Density Limit:</strong> 30.0 kg/m² (Zero Mortality)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function setMode(mode) {
+            const btnStaggered = document.getElementById('btnStaggered');
+            const btnBatch = document.getElementById('btnBatch');
+            const modeDisplay = document.getElementById('modeDisplay');
+
+            if (mode === 'staggered') {
+                btnStaggered.classList.add('active');
+                btnBatch.classList.remove('active');
+                modeDisplay.innerText = "ACTIVE MODE: STRATEGY 1 - STAGGERED HARVEST ENGINE (CONTINUOUS REVENUE)";
+
+                // Update Pod Labels for Staggered Mode
+                document.getElementById('p1-temp').innerText = "33.5°C";
+                document.getElementById('p1-age').innerText = "Wk 1-2 (Chicks)";
+                document.getElementById('p1-birds').innerText = "1,440 Birds (0.05-0.5kg)";
+                document.getElementById('p1-density').innerText = "Density: 2.2 kg/m²";
+
+                document.getElementById('p2-temp').innerText = "26.0°C";
+                document.getElementById('p2-age').innerText = "Wk 3-4 (Growing)";
+                document.getElementById('p2-birds').innerText = "1,440 Birds (0.6-1.2kg)";
+                document.getElementById('p2-density').innerText = "Density: 12.5 kg/m²";
+
+                document.getElementById('p3-temp').innerText = "22.0°C";
+                document.getElementById('p3-age').innerText = "Wk 4-5 (Maturing)";
+                document.getElementById('p3-birds').innerText = "1,440 Birds (1.2-1.6kg)";
+                document.getElementById('p3-density').innerText = "Density: 21.0 kg/m²";
+
+                document.getElementById('p4-temp').innerText = "19.0°C";
+                document.getElementById('p4-age').innerText = "Wk 5-6 (HARVEST)";
+                document.getElementById('p4-birds').innerText = "1,440 Birds @ 2.0kg Target";
+                document.getElementById('p4-density').innerText = "Density: 30.0 kg/m² MAX";
+            } else {
+                btnBatch.classList.add('active');
+                btnStaggered.classList.remove('active');
+                modeDisplay.innerText = "ACTIVE MODE: STRATEGY 2 - ALL-IN / ALL-OUT BATCH ENGINE (BULK PAYDAY)";
+
+                // Update Pod Labels for All-In All-Out Batch Mode
+                document.getElementById('p1-temp').innerText = "19.0°C";
+                document.getElementById('p1-age').innerText = "Wk 6 (Bulk Harvest)";
+                document.getElementById('p1-birds').innerText = "1,440 Birds @ 2.0kg Target";
+                document.getElementById('p1-density').innerText = "Density: 30.0 kg/m²";
+
+                document.getElementById('p2-temp').innerText = "19.0°C";
+                document.getElementById('p2-age').innerText = "Wk 6 (Bulk Harvest)";
+                document.getElementById('p2-birds').innerText = "1,440 Birds @ 2.0kg Target";
+                document.getElementById('p2-density').innerText = "Density: 30.0 kg/m²";
+
+                document.getElementById('p3-temp').innerText = "19.0°C";
+                document.getElementById('p3-age').innerText = "Wk 6 (Bulk Harvest)";
+                document.getElementById('p3-birds').innerText = "1,440 Birds @ 2.0kg Target";
+                document.getElementById('p3-density').innerText = "Density: 30.0 kg/m²";
+
+                document.getElementById('p4-temp').innerText = "19.0°C";
+                document.getElementById('p4-age').innerText = "Wk 6 (Bulk Harvest)";
+                document.getElementById('p4-birds').innerText = "1,440 Birds @ 2.0kg Target";
+                document.getElementById('p4-density').innerText = "Density: 30.0 kg/m² MAX";
+            }
+        }
+    </script>
+
+</body></html>
