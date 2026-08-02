@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated PLC HMI - Process Telemetry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=JetBrains+Mono:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-color: #020617;
+            color: #FFFFFF;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .hmi-container {
+            width: 1000px;
+            height: 520px;
+            background: #0f172a;
+            border: 2px solid #1e293b;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            grid-template-rows: 50px 1fr;
+            gap: 15px;
+        }
+
+        /* HMI TOP BAR */
+        .hmi-header {
+            grid-column: 1 / -1;
+            background: #020617;
+            border: 1px solid #1e293b;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hmi-title {
+            font-family: 'Montserrat', sans-serif;
+            color: #0D9488;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sys-status {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 12px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .led-green {
+            width: 10px;
+            height: 10px;
+            background-color: #0D9488;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #0D9488;
+            animation: blink 1s infinite alternate;
+        }
+
+        /* SIDE INSTRUMENTATION RACK */
+        .side-rack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rack-card {
+            background: #020617;
+            border: 1px solid #1e293b;
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .card-label {
+            font-family: 'Montserrat', sans-serif;
+            color: #B8860B;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 4px;
+        }
+
+        .readout-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .readout-unit {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        /* VALVE GRAPHIC STEPPER */
+        .valve-visualization {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .valve-track {
+            height: 14px;
+            background: #1e293b;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #334155;
+        }
+
+        .valve-fill {
+            height: 100%;
+            background: #0D9488;
+            width: 45%;
+            transition: width 0.3s ease;
+        }
+
+        .valve-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .ctrl-btn {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            padding: 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .ctrl-btn:hover {
+            border-color: #0D9488;
+            color: #0D9488;
+            background: rgba(13, 148, 136, 0.05);
+        }
+
+        /* REAL TIME PLOT CANVAS VIEWPORT */
+        .main-telemetry-panel {
+            background: #020617;
+            border: 1px solid #1e293b;
+            border-radius: 6px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 15px;
+            font-size: 11px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .color-key {
+            width: 12px;
+            height: 4px;
+            border-radius: 2px;
+        }
+
+        #hmiCanvas {
+            width: 100%;
+            height: 100%;
+            background: #010409;
+            border: 1px solid #111827;
+            border-radius: 4px;
+        }
+
+        @keyframes blink {
+            from { opacity: 0.4; }
+            to { opacity: 1; box-shadow: 0 0 12px #0D9488; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hmi-container">
+    
+    <!-- TOP STATUS LINE -->
+    <div class="hmi-header">
+        <div class="hmi-title">
+            <span class="led-green"></span>
+            PLC ACTIVE // STATION_NODE_01
+        </div>
+        <div class="sys-status">
+            <span>NETWORK: <b style="color: #0D9488;">LoRaWAN_ONLINE</b></span>
+            <span>PID STATE: <b style="color: #B8860B;">STABLE</b></span>
+        </div>
+    </div>
+
+    <!-- LEFT PANEL: MODBUS READOUTS & VALVE MANIPULATION -->
+    <div class="side-rack">
+        
+        <div class="rack-card">
+            <div class="card-label">TI-101 Bioreactor Temp</div>
+            <div class="readout-value" id="tempReadout">37.52 <span class="readout-unit">°C</span></div>
+        </div>
+
+        <div class="rack-card">
+            <div class="card-label">XV-101 Valve Position</div>
+            <div class="readout-value" id="valveReadout">45.0 <span class="readout-unit">%</span></div>
+            <div class="valve-visualization">
+                <div class="valve-track">
+                    <div class="valve-fill" id="valveBar" style="width: 45%;"></div>
+                </div>
+                <div class="valve-btns">
+                    <div class="ctrl-btn" onclick="adjustValve(-5)">-5% STEP</div>
+                    <div class="ctrl-btn" onclick="adjustValve(5)">+5% STEP</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rack-card">
+            <div class="card-label">Biogas Flow Rate</div>
+            <div class="readout-value">14.8 <span class="readout-unit">Nm³/h</span></div>
+        </div>
+
+        <div class="rack-card" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; opacity: 0.75;">
+            <div class="card-label" style="margin-bottom: 4px;">Safety Interlocks</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #64748b; line-height: 1.4;">
+                [ ESD_1: NORMAL ]<br>
+                [ PRESSURE: ISOBARIC ]<br>
+                [ OVERPRESSURE: SAFE ]
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT PANEL: THE BEIJING PRESTIGE REAL-TIME SCROLLING CURVES -->
+    <div class="main-telemetry-panel">
+        <div class="chart-header">
+            <div style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #94a3b8; font-weight: 700; letter-spacing: 0.5px;">REAL-TIME SYSTEM PROCESS CURVES</div>
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="color-key" style="background: #0D9488;"></div>
+                    <span style="color: #0D9488;">Core Temp (°C)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-key" style="background: #B8860B;"></div>
+                    <span style="color: #B8860B;">Valve Position (%)</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="flex-grow: 1; position: relative;">
+            <canvas id="hmiCanvas"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const canvas = document.getElementById('hmiCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Handle high-DPI scaling safely
+    function resizeCanvas() {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+    }
+    resizeCanvas();
+
+    // Data Structures for Real-Time Scrolling Telemetry
+    const maxDataPoints = 120;
+    const tempHistory = Array(maxDataPoints).fill(37.5);
+    const valveHistory = Array(maxDataPoints).fill(45.0);
+
+    let currentTemp = 37.50;
+    let targetValvePosition = 45.0;
+    let actualValvePosition = 45.0;
+    let cycleCounter = 0;
+
+    function adjustValve(amount) {
+        targetValvePosition = Math.max(0, Math.min(100, targetValvePosition + amount));
+        document.getElementById('valveReadout').innerHTML = targetValvePosition.toFixed(1) + ' <span class="readout-unit">%</span>';
+        document.getElementById('valveBar').style.width = targetValvePosition + '%';
+    }
+
+    // Main Compute and Render Loop
+    function updateHmiTelemetry() {
+        cycleCounter++;
+
+        // Simulate biological loop PID oscillation variables
+        const noise = (Math.sin(cycleCounter * 0.1) * 0.04) + (Math.random() * 0.02 - 0.01);
+        // Valve manipulation slightly alters core biological temperature dynamics
+        const valveInfluence = (actualValvePosition - 50) * 0.002;
+        currentTemp = 37.50 + noise + valveInfluence;
+
+        // Smoothly step valve position tracking toward targeted register position
+        actualValvePosition += (targetValvePosition - actualValvePosition) * 0.1;
+
+        document.getElementById('tempReadout').innerHTML = currentTemp.toFixed(2) + ' <span class="readout-unit">°C</span>';
+
+        // Push new computed registers into histories, drop historical indexes
+        tempHistory.push(currentTemp);
+        tempHistory.shift();
+        valveHistory.push(actualValvePosition);
+        valveHistory.shift();
+
+        // --- DRAW RENDERING ON MATRIX GRID ---
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const w = canvas.width;
+        const h = canvas.height;
+
+        // Draw Technical Grid Layout Lines
+        ctx.strokeStyle = '#111827';
+        ctx.lineWidth = 1;
+        for (let i = 0; i < w; i += 40) {
+            ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, h); ctx.stroke();
+        }
+        for (let j = 0; j < h; j += 40) {
+            ctx.beginPath(); ctx.moveTo(0, j); ctx.lineTo(w, j); ctx.stroke();
+        }
+
+        // Render Curves
+        drawCurve(tempHistory, 36.5, 38.5, '#0D9488', 2);
+        drawCurve(valveHistory, 0, 100, '#B8860B', 2);
+
+        requestAnimationFrame(updateHmiTelemetry);
+    }
+
+    function drawCurve(dataArray, minVal, maxVal, color, lineWidth) {
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = lineWidth;
+        ctx.lineJoin = 'round';
+
+        const stepX = canvas.width / (maxDataPoints - 1);
+
+        for (let i = 0; i < dataArray.length; i++) {
+            // Map the value array to canvas coordinate space dimensions safely
+            const normalizedY = (dataArray[i] - minVal) / (maxVal - minVal);
+            const yCoord = canvas.height - (normalizedY * (canvas.height * 0.8) + (canvas.height * 0.1));
+            const xCoord = i * stepX;
+
+            if (i === 0) {
+                ctx.moveTo(xCoord, yCoord);
+            } else {
+                ctx.lineTo(xCoord, yCoord);
+            }
+        }
+        ctx.stroke();
+    }
+
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+    });
+
+    // Fire Compute Engine Execution Loop
+    updateHmiTelemetry();
+</script>
+
+</body>
+</html>
