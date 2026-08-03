@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)file:///C:/Users/ASUS/Downloads/gemini-code-1785379295367.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scapush Precision - Master CAPEX Analysis</title>
+    <style>
+        :root {
+            --bg-color: #0d131f;
+            --card-bg: #1a2332;
+            --accent: #d4af37; /* Dull Gold */
+            --teal: #14b8a6;   /* Teal for subheadings */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --success: #34d399;
+            --warning: #fbbf24;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+            overflow: hidden;
+        }
+
+        .presentation-deck {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+            min-height: 520px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide {
+            display: none;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 100%;
+            box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        p.subtitle {
+            color: var(--teal);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .badge {
+            background-color: rgba(20, 184, 166, 0.1);
+            color: var(--teal);
+            border: 1px solid var(--teal);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .metric-card label {
+            font-size: 0.75rem;
+            color: var(--teal);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .metric-card .value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .capex-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            font-size: 0.88rem;
+        }
+
+        .capex-table th, .capex-table td {
+            padding: 0.65rem 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .capex-table th {
+            color: var(--teal);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .capex-table td.amount {
+            font-family: monospace;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .feature-box h3 {
+            font-size: 0.95rem;
+            color: var(--teal);
+            margin-bottom: 0.4rem;
+        }
+
+        .feature-box p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .role-banner {
+            background-color: rgba(212, 175, 55, 0.05);
+            border-left: 3px solid var(--accent);
+            padding: 0.85rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1rem;
+            font-size: 0.88rem;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 900px;
+            width: 100%;
+            margin-top: 1.25rem;
+            padding: 0 0.5rem;
+        }
+
+        .nav-btn {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background-color: #273449;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .slide-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+    <main class="presentation-deck">
+        
+        <!-- Slide 1: Master Allocation -->
+        <article class="slide">
+            <header>
+                <div>
+                    <h1>SCAPUSH PRECISION</h1>
+                    <p class="subtitle">Lwandile Engineering Projects | Mpumalanga</p>
+                </div>
+                <span class="badge">Total CAPEX: R 3,100,000</span>
+            </header>
+            <table class="capex-table">
+                <thead>
+                    <tr>
+                        <th>Infrastructure Entry</th>
+                        <th>CAPEX Value (ZAR)</th>
+                        <th>Primary Strategic Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>30kW/30kWh Industrial BESS &amp; Solar PV Grid</td><td class="amount">R 650,000</td><td>Thermal reserve stability &amp; baseload buffer</td></tr>
+                    <tr><td>Biogas Digester &amp; Co-Gen Generator</td><td class="amount">R 420,000</td><td>Closed-loop electricity and hot steam generation</td></tr>
+                    <tr><td>Stage 1: Swine Nursery Pod Structure (48 m²)</td><td class="amount">R 280,000</td><td>Airtight physical pod pathogen isolation</td></tr>
+                    <tr><td>Stage 2: Swine Finisher Barn (384 m²)</td><td class="amount">R 450,000</td><td>High-occupancy biomass grow-out environment</td></tr>
+                    <tr><td>Poultry Sprint Barn &amp; Systems (384 m²)</td><td class="amount">R 550,000</td><td>Passive aerodynamic convective airflow</td></tr>
+                    <tr><td>Supporting Lifelines Valuation</td><td class="amount">R 750,000</td><td>Hydrology, Civil, Biosecurity, IoT &amp; Contingency</td></tr>
+                </tbody>
+            </table>
+        </article>
+
+        <!-- Slide 2: Solar & BESS -->
+        <article class="slide">
+            <header>
+                <div>
+                    <h1>SOLAR &amp; BESS INFRASTRUCTURE</h1>
+                    <p class="subtitle">Energy Sovereignty &amp; Grid Independence</p>
+                </div>
+                <span class="badge">R 650,000</span>
+            </header>
+            <div class="feature-grid">
+                <div class="feature-box">
+                    <h3>30kW Hybrid Inverter</h3>
+                    <p>Manages high-inductive loads from water pumping and mechanical augers.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>30kWh LFP Battery</h3>
+                    <p>Lithium Iron Phosphate storage providing deep-cycle reserves for nighttime lighting.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>25kWp Solar Array</h3>
+                    <p>Roof-mounted monocrystalline PV panels generate steady daily recharges.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Grid Protection</h3>
+                    <p>Ensures energy sovereignty for critical electrical components during grid instability.</p>
+                </div>
+            </div>
+            <div class="role-banner">
+                <strong>Functional Role:</strong> Functions as the main energy shield, delivering consistent power to backup electric heating mats, automated feed lines, and data dashboard networks.
+            </div>
+        </article>
+
+        <!-- Slide 3: Biogas & Co-Gen -->
+        <article class="slide">
+            <header>
+                <div>
+                    <h1>BIOGAS &amp; CO-GEN LOOP</h1>
+                    <p class="subtitle">Waste-to-Energy Thermal Cycle</p>
+                </div>
+                <span class="badge">R 420,000</span>
+            </header>
+            <div class="feature-grid">
+                <div class="feature-box">
+                    <h3>70 m³ Anaerobic Digester</h3>
+                    <p>Processes organic animal manure slurry completely off-grid.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>12kVA Gas Generator Set</h3>
+                    <p>Converts captured methane directly into electrical volts.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Heat Exchanger Jacket</h3>
+                    <p>Extracts exhaust engine heat to produce high-temperature steam lines.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Thermal Resilience</h3>
+                    <p>Converts agricultural waste into free thermal/electrical power for extreme cold protection.</p>
+                </div>
+            </div>
+            <div class="role-banner">
+                <strong>Functional Role:</strong> Supplies direct subsurface floor steam heat to swine nursery pods, removing massive heating thermal loads from BESS batteries during cold highveld nights.
+            </div>
+        </article>
+
+        <!-- Slide 4: Swine Nursery Pods -->
+        <article class="slide">
+            <header>
+                <div>
+                    <h1>SWINE STAGE 1: NURSERY PODS</h1>
+                    <p class="subtitle">Immunological Air-Gapping (48 m²)</p>
+                </div>
+                <span class="badge">R 280,000</span>
+            </header>
+            <div class="feature-grid">
+                <div class="feature-box">
+                    <h3>Insulated Cavity Walls</h3>
+                    <p>Double-skin brick design locks inside microclimate heat perfectly.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Elevated Polypropylene Floor</h3>
+                    <p>Soft plastic slatted grids keep animal beds dry and sanitary.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>4 Sealed Chambers</h3>
+                    <p>Vapor-tight doors isolate populations into secure 12 m² sub-units.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Pathogen Barrier</h3>
+                    <p>High-insulation boundary block to protect vulnerable, newly weaned piglets.</p>
+                </div>
+            </div>
+            <div class="role-banner">
+                <strong>Functional Role:</strong> Provides immunological air-gapping, isolating weaners from older finishing hogs and capping structural pathogen spread to a maximum 25% exposure limit.
+            </div>
+        </article>
+
+        <!-- Slide 5: Swine Finisher Barn -->
+        <article class="slide">
+            <header>
+                <div>
+                    <h1>SWINE STAGE 2: FINISHER BARN</h1>
+                    <p class="subtitle">Heavy Grow-Out Payload Barn (384 m²)</p>
+                </div>
+                <span class="badge">R 450,000</span>
+            </header>
+            <div class="feature-grid">
+                <div class="feature-box">
+                    <h3>Open-Sided Portal Frame</h3>
+                    <p>Structural steel frame maximizing passive cross-wind cooling.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Deep-Litter Composting Bed</h3>
+                    <p>Composting sawdust layer generates insulation and organic manure fertilizer.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Winch Curtain Curbs</h3>
+                    <p>Heavy PVC canvas shields hogs from high-wind storm fronts.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>160 Hog Capacity</h3>
+                    <p>Designed for large physical volumes and high metabolic body heat.</p>
+                </div>
+            </div>
+            <div class="role-banner">
+                <strong>Functional Role:</strong> Houses up to 160 hogs simultaneously through their 16-week growth cycle, shifting metabolic output into heavy market-ready weight payload.
+            </div>
+        </article>
+
+        <!-- Slide 6: Poultry Sprint Barn -->
+        <article class="slide">
+            <header>
+                <div>
+                    <h1>POULTRY SPRINT BARN</h1>
+                    <p class="subtitle">High-Velocity Broiler Facility (384 m²)</p>
+                </div>
+                <span class="badge">R 550,000</span>
+            </header>
+            <div class="feature-grid">
+                <div class="feature-box">
+                    <h3>Thermal Ridge Chimney</h3>
+                    <p>18-degree roof pitch generates passive siphon airflow naturally.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>50mm PIR Ceiling Board</h3>
+                    <p>Premium roof insulation blocks extreme radiant summer sun loads.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Internal Brooding Isolation</h3>
+                    <p>Curtains seal off 128 m² for energy-efficient Day 1-14 heating.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>5,760 Broilers / Batch</h3>
+                    <p>Passive convective cooling eliminates the need for heavy electric extraction fans.</p>
+                </div>
+            </div>
+            <div class="role-banner">
+                <strong>Functional Role:</strong> Hosts 5,760 broilers per batch. Passive convective cooling eliminates the need for heavy electric extraction fans, protecting BESS reserve levels.
+            </div>
+        </article>
+
+        <!-- Slide 7: Civil & Hydrology Lifelines -->
+        <article class="slide">
+            <header>
+                <div>
+                    <h1>CIVIL, HYDROLOGY &amp; BIOSECURITY</h1>
+                    <p class="subtitle">Supporting Lifelines Overview</p>
+                </div>
+                <span class="badge">R 750,000 Combined</span>
+            </header>
+            <table class="capex-table">
+                <thead>
+                    <tr>
+                        <th>Lifeline Infrastructure</th>
+                        <th>CAPEX</th>
+                        <th>Key Mechanism</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Hydrology &amp; Tower</td><td class="amount">R 180,000</td><td>10,000L elevated tank (5-day reserve), solar pumping &amp; UV filters</td></tr>
+                    <tr><td>Slabs &amp; Drainage</td><td class="amount">R 220,000</td><td>2% gradient gravity channels delivering waste directly to digester</td></tr>
+                    <tr><td>Biosecurity Gates</td><td class="amount">R 95,000</td><td>Wheel spray-dips, shower-in change block &amp; pod sanitization footbaths</td></tr>
+                    <tr><td>IoT Automation</td><td class="amount">R 75,000</td><td>LoRaWAN sensors monitoring ambient temp, humidity, pulse water flow</td></tr>
+                    <tr><td>Contingency &amp; Fees</td><td class="amount">R 180,000</td><td>Third-party civil, electrical, and biological engineering sign-offs</td></tr>
+                </tbody>
+            </table>
+        </article>
+
+        <!-- Slide 8: Value Engineering -->
+        <article class="slide active">
+            <header>
+                <div>
+                    <h1>VALUE ENGINEERING REVIEW</h1>
+                    <p class="subtitle">Investment Model Locked</p>
+                </div>
+                <span class="badge" style="border-color: var(--success); color: var(--success);">LOCKED</span>
+            </header>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <label>CAPEX Savings</label>
+                    <div class="value" style="color: var(--accent);">R 150,000</div>
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Nursery pods bypass double-roof interior overheads.</p>
+                </div>
+                <div class="metric-card">
+                    <label>OPEX Reduction</label>
+                    <div class="value" style="color: var(--success);">Maximized</div>
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Gravity waste &amp; siphon chimneys cut base draw.</p>
+                </div>
+                <div class="metric-card">
+                    <label>Asset Defense</label>
+                    <div class="value">Zero Mortality</div>
+                    <p style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Decentralized pods &amp; sterilization stabilize cash flow.</p>
+                </div>
+            </div>
+            <div class="role-banner" style="border-left-color: var(--success);">
+                <strong>Execution Status:</strong> Total Project CAPEX locked at <strong>R 3,100,000</strong> for Lwandile Engineering Projects (Pty) Ltd - Mpumalanga JET Infrastructure Precision Execution.
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Navigation Bar -->
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" onclick="prevSlide()">← Prev</button>
+        <div class="slide-dots" id="dotsContainer"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot active"></div></div>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()" disabled="">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('dotsContainer');
+
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateDeck() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+                dots[index].classList.toggle('active', index === currentSlide);
+            });
+
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slides.length - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateDeck();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateDeck();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateDeck();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        updateDeck();
+    </script>
+
+
+</body></html>
