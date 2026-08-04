@@ -1,0 +1,15 @@
+===========================================================
+LWANDILE ENGINEERING PROJECTS - SOVEREIGN COMMUNICATIONS TERMINAL
+===========================================================
+
+PRIMARY SECURE P2P LINK:
+https://p2p.mirotalk.com/join/Lwandile-Engineering-Command
+
+PROTOCOL: WebRTC (Zero-Login / Direct-Peer / Encrypted)
+ACCESS CONTROL: Universal (All Authorized Project Partners & Stakeholders)
+
+OPERATIONAL NOTES:
+- Zero authentication or third-party cloud account required for any participant.
+- High-fidelity screen sharing enabled for technical assets and live interfaces.
+- Host locks room once all invited participants have connected.
+===========================================================
