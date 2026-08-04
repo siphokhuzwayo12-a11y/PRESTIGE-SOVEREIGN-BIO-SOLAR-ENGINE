@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///C:/Users/ASUS/Downloads/gemini-code-1785457694327.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borehole Water Sub-system | LEP-IMP-ENG-2026-WAT</title>
     <style>
@@ -77,51 +77,51 @@
 
     <div class="toolbar">
         <span style="color: var(--accent-gold); text-transform: uppercase;">CAD Layers:</span>
-        <label class="layer-toggle"><input type="checkbox" checked="" onchange="toggleLayer(&#39;LAYER_BOREHOLE&#39;)"> Borehole Well &amp; Pump</label>
-        <label class="layer-toggle"><input type="checkbox" checked="" onchange="toggleLayer(&#39;LAYER_STORAGE&#39;)"> Buffer Water Storage</label>
-        <label class="layer-toggle"><input type="checkbox" checked="" onchange="toggleLayer(&#39;LAYER_FEEDERS&#39;)"> Process Feed Lines</label>
-        <label class="layer-toggle"><input type="checkbox" checked="" onchange="toggleLayer(&#39;LAYER_SCADA_WAT&#39;)"> SCADA Telemetry</label>
-        <label class="layer-toggle"><input type="checkbox" checked="" onchange="toggleLayer(&#39;LAYER_TITLE_BLOCK&#39;)"> Title Block &amp; IP</label>
+        <label class="layer-toggle"><input type="checkbox" checked onchange="toggleLayer('LAYER_BOREHOLE')"> Borehole Well &amp; Pump</label>
+        <label class="layer-toggle"><input type="checkbox" checked onchange="toggleLayer('LAYER_STORAGE')"> Buffer Water Storage</label>
+        <label class="layer-toggle"><input type="checkbox" checked onchange="toggleLayer('LAYER_FEEDERS')"> Process Feed Lines</label>
+        <label class="layer-toggle"><input type="checkbox" checked onchange="toggleLayer('LAYER_SCADA_WAT')"> SCADA Telemetry</label>
+        <label class="layer-toggle"><input type="checkbox" checked onchange="toggleLayer('LAYER_TITLE_BLOCK')"> Title Block &amp; IP</label>
     </div>
 
     <div class="viewport">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
             <defs>
                 <pattern id="cadGrid" width="30" height="30" patternUnits="userSpaceOnUse">
-                    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"></path>
+                    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
                 </pattern>
                 <marker id="arrow-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"></path>
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/>
                 </marker>
             </defs>
 
             <!-- CAD GRID & BORDER -->
-            <rect width="1200" height="700" fill="url(#cadGrid)"></rect>
-            <rect x="15" y="15" width="1170" height="670" fill="none" stroke="#d4af37" stroke-width="3"></rect>
+            <rect width="1200" height="700" fill="url(#cadGrid)"/>
+            <rect x="15" y="15" width="1170" height="670" fill="none" stroke="#d4af37" stroke-width="3"/>
 
             <!-- LAYER 1: BOREHOLE WELL & PUMP -->
             <g id="LAYER_BOREHOLE">
                 <!-- Ground Level Line -->
-                <line x1="50" y1="220" x2="350" y2="220" stroke="#d4af37" stroke-width="3" stroke-dasharray="8,4"></line>
+                <line x1="50" y1="220" x2="350" y2="220" stroke="#d4af37" stroke-width="3" stroke-dasharray="8,4"/>
                 <text x="70" y="205" fill="#d4af37" font-size="14" font-weight="bold">GROUND LEVEL</text>
 
                 <!-- Well Casing -->
-                <rect x="140" y="220" width="80" height="300" fill="#141c2b" stroke="#cbd5e1" stroke-width="2"></rect>
+                <rect x="140" y="220" width="80" height="300" fill="#141c2b" stroke="#cbd5e1" stroke-width="2"/>
                 <text x="180" y="360" fill="#cbd5e1" font-size="13" font-weight="bold" text-anchor="middle" transform="rotate(-90,180,360)">BOREHOLE CASING (160mm)</text>
 
                 <!-- Submersible Pump -->
-                <rect x="155" y="440" width="50" height="70" fill="#38bdf8" stroke="#f8fafc" stroke-width="2" rx="4"></rect>
+                <rect x="155" y="440" width="50" height="70" fill="#38bdf8" stroke="#f8fafc" stroke-width="2" rx="4"/>
                 <text x="180" y="480" fill="#0b1019" font-size="12" font-weight="bold" text-anchor="middle">PUMP-01</text>
                 <text x="180" y="535" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">2.2kW Solar VFD Pump</text>
 
                 <!-- Riser Pipe -->
-                <path d="M 180 440 L 180 140 L 420 140" fill="none" stroke="#38bdf8" stroke-width="4" marker-end="url(#arrow-blue)"></path>
+                <path d="M 180 440 L 180 140 L 420 140" fill="none" stroke="#38bdf8" stroke-width="4" marker-end="url(#arrow-blue)"/>
             </g>
 
             <!-- LAYER 2: BUFFER WATER STORAGE -->
             <g id="LAYER_STORAGE">
-                <rect x="420" y="90" width="220" height="260" fill="#141c2b" stroke="#38bdf8" stroke-width="3" rx="6"></rect>
-                <path d="M 425 200 Q 530 210 635 200 L 635 345 L 425 345 Z" fill="rgba(56, 189, 248, 0.2)"></path>
+                <rect x="420" y="90" width="220" height="260" fill="#141c2b" stroke="#38bdf8" stroke-width="3" rx="6"/>
+                <path d="M 425 200 Q 530 210 635 200 L 635 345 L 425 345 Z" fill="rgba(56, 189, 248, 0.2)"/>
                 
                 <text x="530" y="130" fill="#38bdf8" font-size="18" font-weight="bold" text-anchor="middle">10,000L BUFFER TANK</text>
                 <text x="530" y="155" fill="#cbd5e1" font-size="13" font-weight="bold" text-anchor="middle">(Raw Water Storage)</text>
@@ -131,43 +131,43 @@
             <!-- LAYER 3: PROCESS FEED LINES -->
             <g id="LAYER_FEEDERS">
                 <!-- Main Header Discharge -->
-                <path d="M 640 300 L 800 300" fill="none" stroke="#38bdf8" stroke-width="4"></path>
+                <path d="M 640 300 L 800 300" fill="none" stroke="#38bdf8" stroke-width="4"/>
 
                 <!-- Branch 1: Digester Slurry Premix -->
-                <path d="M 800 300 L 800 180 L 1100 180" fill="none" stroke="#38bdf8" stroke-width="3.5" marker-end="url(#arrow-blue)"></path>
+                <path d="M 800 300 L 800 180 L 1100 180" fill="none" stroke="#38bdf8" stroke-width="3.5" marker-end="url(#arrow-blue)"/>
                 <text x="950" y="165" fill="#34d399" font-size="14" font-weight="bold">70m³ Digester Slurry Line</text>
 
                 <!-- Branch 2: CHP Hydronic Makeup -->
-                <path d="M 800 300 L 1100 300" fill="none" stroke="#38bdf8" stroke-width="3.5" marker-end="url(#arrow-blue)"></path>
+                <path d="M 800 300 L 1100 300" fill="none" stroke="#38bdf8" stroke-width="3.5" marker-end="url(#arrow-blue)"/>
                 <text x="950" y="285" fill="#ef4444" font-size="14" font-weight="bold">CHP Hydronic Expansion Loop</text>
 
                 <!-- Branch 3: Nursery & Site Utility -->
-                <path d="M 800 300 L 800 420 L 1100 420" fill="none" stroke="#38bdf8" stroke-width="3.5" marker-end="url(#arrow-blue)"></path>
+                <path d="M 800 300 L 800 420 L 1100 420" fill="none" stroke="#38bdf8" stroke-width="3.5" marker-end="url(#arrow-blue)"/>
                 <text x="950" y="445" fill="#f59e0b" font-size="14" font-weight="bold">Nursery Irrigation Line</text>
             </g>
 
             <!-- LAYER 4: SCADA TELEMETRY -->
             <g id="LAYER_SCADA_WAT">
                 <!-- Borehole Flow Meter -->
-                <circle cx="300" cy="140" r="20" fill="#070a10" stroke="#34d399" stroke-width="2"></circle>
+                <circle cx="300" cy="140" r="20" fill="#070a10" stroke="#34d399" stroke-width="2"/>
                 <text x="300" y="145" fill="#34d399" font-size="11" font-weight="bold" text-anchor="middle">FM-401</text>
                 <text x="300" y="105" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">Flow: 3.5 m³/h</text>
 
                 <!-- Tank Level Sensor -->
-                <circle cx="530" cy="90" r="20" fill="#070a10" stroke="#34d399" stroke-width="2"></circle>
+                <circle cx="530" cy="90" r="20" fill="#070a10" stroke="#34d399" stroke-width="2"/>
                 <text x="530" y="95" fill="#34d399" font-size="11" font-weight="bold" text-anchor="middle">LT-401</text>
                 <text x="530" y="55" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">Level Transmitter</text>
 
                 <!-- Solar VFD Status Box -->
-                <rect x="50" y="80" width="180" height="80" fill="#141c2b" stroke="#d4af37" stroke-width="2" rx="4"></rect>
+                <rect x="50" y="80" width="180" height="80" fill="#141c2b" stroke="#d4af37" stroke-width="2" rx="4"/>
                 <text x="140" y="105" fill="#d4af37" font-size="14" font-weight="bold" text-anchor="middle">SOLAR VFD DRIVE</text>
                 <text x="140" y="130" fill="#34d399" font-size="13" font-weight="bold" text-anchor="middle">50Hz Auto-Match</text>
             </g>
 
             <!-- LAYER 5: TITLE BLOCK -->
             <g id="LAYER_TITLE_BLOCK">
-                <rect x="50" y="550" width="1100" height="110" fill="#141c2b" stroke="#d4af37" stroke-width="2"></rect>
-                <line x1="750" y1="550" x2="750" y2="660" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"></line>
+                <rect x="50" y="550" width="1100" height="110" fill="#141c2b" stroke="#d4af37" stroke-width="2"/>
+                <line x1="750" y1="550" x2="750" y2="660" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
                 
                 <text x="70" y="580" fill="#14b8a6" font-size="14" font-weight="bold">PROJECT: LEP-IMP-ENG-2026</text>
                 <text x="70" y="608" fill="#f8fafc" font-size="18" font-weight="bold">BOREHOLE EXTRACTION &amp; WATER DISTRIBUTION SCHEMATIC</text>
@@ -194,5 +194,5 @@
             }
         }
     </script>
-
-</body></html>
+</body>
+</html>
