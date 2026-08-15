@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lwandile Engineering - Closed-Loop Bio-Thermal Blueprint</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #030712;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .teal-gradient-text {
+            background: linear-gradient(135deg, #2dd4bf 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .slide-aspect {
+            aspect-ratio: 16 / 9;
+        }
+        /* Print Styles for High-Res Vector PDF Export */
+        @media print {
+            @page {
+                size: 11in 6.1875in; /* 16:9 Landscape */
+                margin: 0;
+            }
+            body {
+                background-color: #030712 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .slide-container {
+                display: block !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                max-width: none !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 md:p-6 bg-slate-950">
+
+    <!-- Top Controls Bar -->
+    <header class="no-print w-full max-w-6xl flex flex-wrap justify-between items-center bg-slate-900/90 border border-slate-800 rounded-xl p-3 mb-4 backdrop-blur-md shadow-lg gap-3">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-teal-500/20 border border-teal-500/40 flex items-center justify-center text-teal-400 font-bold">
+                LE
+            </div>
+            <div>
+                <h1 class="text-sm font-semibold text-slate-200">Lwandile Engineering Projects</h1>
+                <p class="text-xs text-slate-400">Closed-Loop Bio-Thermal Blueprint</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <button onclick="toggleModal()" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-lg hover:bg-amber-500/20 transition">
+                <i data-lucide="help-circle" class="w-4 h-4"></i>
+                <span>How to Save "Undiluted" PPT</span>
+            </button>
+            <button onclick="window.print()" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-teal-500 text-slate-950 font-semibold rounded-lg hover:bg-teal-400 transition shadow-md shadow-teal-500/20">
+                <i data-lucide="file-down" class="w-4 h-4"></i>
+                <span>Export High-Res PDF</span>
+            </button>
+            <button onclick="toggleFullscreen()" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700 rounded-lg hover:bg-slate-700 transition">
+                <i data-lucide="maximize" class="w-4 h-4"></i>
+                <span>Fullscreen</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Presentation Viewer Frame -->
+    <main class="w-full max-w-6xl flex-1 flex flex-col items-center justify-center">
+
+        <!-- SLIDE 1 -->
+        <section id="slide-1" class="slide-container slide-aspect w-full bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl relative overflow-hidden flex flex-col justify-between p-8 md:p-12">
+            <div class="absolute -top-32 -right-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex justify-between items-start border-b border-slate-800/80 pb-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-teal-400"></div>
+                    <span class="text-xs font-bold tracking-widest text-teal-400 uppercase">Lwandile Engineering Projects</span>
+                </div>
+                <span class="text-xs font-mono text-slate-500 font-semibold">01 / 06</span>
+            </div>
+
+            <div class="my-auto text-center flex flex-col items-center justify-center py-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-700/60 text-slate-400 text-xs mb-6">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-teal-400"></i>
+                    <span>Prestige Cosmic Venture</span>
+                </div>
+                <h1 class="heading-font text-3xl sm:text-5xl md:text-6xl font-extrabold teal-gradient-text tracking-tight uppercase max-w-4xl leading-tight">
+                    Closed-Loop Bio-Thermal Blueprint
+                </h1>
+                <h2 class="heading-font text-xl sm:text-2xl md:text-3xl font-bold gold-gradient-text mt-4 max-w-3xl">
+                    Sovereign Agri-Utility Food Infrastructure
+                </h2>
+                <div class="mt-8 flex items-center gap-3 bg-slate-900/80 px-6 py-2.5 rounded-xl border border-slate-800 text-sm">
+                    <span class="text-slate-400">Presented by:</span>
+                    <span class="text-teal-400 font-bold">Sipho Wiseman Khuzwayo</span>
+                    <span class="text-slate-500">|</span>
+                    <span class="text-slate-300">Founder & Managing Director</span>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center border-t border-slate-800/80 pt-4 text-[10px] tracking-wider text-slate-500 uppercase">
+                <span>Precision Alliance</span>
+                <span>Govan Mbeki Municipality, Mpumalanga</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 2 -->
+        <section id="slide-2" class="slide-container slide-aspect w-full bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl relative overflow-hidden hidden flex-col justify-between p-8 md:p-12">
+            <div class="flex justify-between items-start border-b border-slate-800/80 pb-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-amber-400"></div>
+                    <span class="text-xs font-bold tracking-widest text-teal-400 uppercase">Lwandile Engineering Projects</span>
+                </div>
+                <span class="text-xs font-mono text-slate-500 font-semibold">02 / 06</span>
+            </div>
+
+            <div class="my-auto py-2">
+                <h2 class="heading-font text-3xl md:text-4xl font-bold gold-gradient-text mb-2">The "Triple Threat" Risk Gaps</h2>
+                <p class="text-slate-300 text-xs sm:text-sm max-w-3xl mb-6 leading-relaxed">
+                    Traditional agricultural business models inside Mpumalanga suffer from three distinct operational risks that bankrupt facilities and scare off smart capital:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+                            <i data-lucide="zap" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="heading-font text-lg font-bold text-amber-400 mb-2">Eskom Tariffs</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Skyrocketing seasonal utility power costs drain up to <strong class="text-slate-200">35%</strong> of standard farm bottom-lines.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+                            <i data-lucide="snowflake" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="heading-font text-lg font-bold text-amber-400 mb-2">Highveld Frosts</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Winter cold snaps trigger massive live inventory hypothermia, raising mortality to <strong class="text-slate-200">18%</strong>.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+                            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="heading-font text-lg font-bold text-amber-400 mb-2">Open-Herd Viruses</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Standard open single-room designs allow pathogens to wipe out entire livestock assets.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center border-t border-slate-800/80 pt-4 text-xs">
+                <span class="text-amber-400/80 font-medium">Impact: High Mortality Rate | High Operational Cost | Vulnerable Supply Chain</span>
+                <span class="text-slate-500">PRESTIGE COSMIC VENTURE</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 3 -->
+        <section id="slide-3" class="slide-container slide-aspect w-full bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl relative overflow-hidden hidden flex-col justify-between p-8 md:p-12">
+            <div class="flex justify-between items-start border-b border-slate-800/80 pb-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-teal-400"></div>
+                    <span class="text-xs font-bold tracking-widest text-teal-400 uppercase">Lwandile Engineering Projects</span>
+                </div>
+                <span class="text-xs font-mono text-slate-500 font-semibold">03 / 06</span>
+            </div>
+
+            <div class="my-auto py-2">
+                <h2 class="heading-font text-3xl md:text-4xl font-bold gold-gradient-text mb-2">The Sovereign Closed Loop</h2>
+                <p class="text-slate-300 text-xs sm:text-sm max-w-3xl mb-6 leading-relaxed">
+                    Our solution integrates high-yield biology with localized co-generation. By using every byproduct on-site, we decouple operations from vulnerable public grids:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+                    <div class="md:col-span-2 space-y-3">
+                        <div class="flex items-start gap-3 bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl">
+                            <div class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-teal-400">30kW BESS & Solar Rooftops</h4>
+                                <p class="text-xs text-slate-400">Powers daytime boreholes, automated augers, and primary controls directly.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl">
+                            <div class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-teal-400">Methane Co-Gen Engine</h4>
+                                <p class="text-xs text-slate-400">Recycles swine slurry into biogas, co-generating supplementary night-time volts.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl">
+                            <div class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-teal-400">Sub-Floor Thermal Plumb</h4>
+                                <p class="text-xs text-slate-400">Routes engine exhaust heat directly underneath nursery pods to warm animals.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-teal-950/30 border border-teal-500/30 rounded-xl p-5 flex flex-col justify-center">
+                        <div class="w-10 h-10 rounded-lg bg-teal-500/20 text-teal-300 flex items-center justify-center mb-3">
+                            <i data-lucide="wind" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="heading-font text-lg font-bold text-amber-400 mb-2">Passive Convection</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Designed with an 18-degree roof pitch to naturally siphon warm, stale air out, bypassing heavy electric fans entirely.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center border-t border-slate-800/80 pt-4 text-xs text-slate-500">
+                <span>Zero-Mortality Microclimate | CO₂ Capture | Waste Recycling</span>
+                <span>PRESTIGE COSMIC VENTURE</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 4 -->
+        <section id="slide-4" class="slide-container slide-aspect w-full bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl relative overflow-hidden hidden flex-col justify-between p-8 md:p-12">
+            <div class="flex justify-between items-start border-b border-slate-800/80 pb-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-teal-400"></div>
+                    <span class="text-xs font-bold tracking-widest text-teal-400 uppercase">Lwandile Engineering Projects</span>
+                </div>
+                <span class="text-xs font-mono text-slate-500 font-semibold">04 / 06</span>
+            </div>
+
+            <div class="my-auto py-2 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-5 flex flex-col justify-center bg-slate-900/60 border border-slate-800 p-6 rounded-2xl text-center">
+                    <span class="heading-font text-5xl md:text-6xl font-black teal-gradient-text">ZAR 1.2B</span>
+                    <span class="text-sm font-bold text-amber-400 uppercase tracking-wider mt-2">TAM (Total Addressable Market)</span>
+                    <p class="text-xs text-slate-400 mt-2">Regional mining worker meat consumption demand.</p>
+                </div>
+
+                <div class="md:col-span-7 space-y-4">
+                    <h2 class="heading-font text-2xl md:text-3xl font-bold gold-gradient-text">Bottoms-Up Sizing Blueprint</h2>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                        The Secunda-Kinross development corridors hold dense worker populations with high demand for premium retail meat supply:
+                    </p>
+
+                    <div class="space-y-3">
+                        <div class="p-3.5 bg-slate-900/80 border border-slate-800 rounded-xl flex items-center justify-between">
+                            <div>
+                                <span class="text-xs font-bold text-teal-400">Total Addressable (TAM)</span>
+                                <p class="text-xs text-slate-400">Regional mining meat consumption profile</p>
+                            </div>
+                            <span class="font-mono text-sm font-bold text-slate-200">ZAR 1.2 Billion</span>
+                        </div>
+
+                        <div class="p-3.5 bg-slate-900/80 border border-slate-800 rounded-xl flex items-center justify-between">
+                            <div>
+                                <span class="text-xs font-bold text-teal-400">Serviceable Addressable (SAM)</span>
+                                <p class="text-xs text-slate-400">High-grade wholesale off-take demand</p>
+                            </div>
+                            <span class="font-mono text-sm font-bold text-amber-400">ZAR 180 Million</span>
+                        </div>
+
+                        <div class="p-3.5 bg-slate-900/80 border border-slate-800 rounded-xl flex items-center justify-between">
+                            <div>
+                                <span class="text-xs font-bold text-teal-400">Serviceable Obtainable (SOM)</span>
+                                <p class="text-xs text-slate-400">Initial baseline year capture target</p>
+                            </div>
+                            <span class="font-mono text-sm font-bold text-teal-300">ZAR 3.39 Million</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center border-t border-slate-800/80 pt-4 text-xs text-slate-500">
+                <span>Govan Mbeki Municipality Target Corridor</span>
+                <span>PRESTIGE COSMIC VENTURE</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 5 -->
+        <section id="slide-5" class="slide-container slide-aspect w-full bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl relative overflow-hidden hidden flex-col justify-between p-8 md:p-12">
+            <div class="flex justify-between items-start border-b border-slate-800/80 pb-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-teal-400"></div>
+                    <span class="text-xs font-bold tracking-widest text-teal-400 uppercase">Lwandile Engineering Projects</span>
+                </div>
+                <span class="text-xs font-mono text-slate-500 font-semibold">05 / 06</span>
+            </div>
+
+            <div class="my-auto py-2">
+                <h2 class="heading-font text-2xl md:text-3xl font-bold gold-gradient-text mb-4">Double High-Velocity Income Model</h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-800 text-amber-400 heading-font uppercase tracking-wider">
+                                <th class="py-3 px-3">Biological Pillar</th>
+                                <th class="py-3 px-3">Standard Batch Sizing</th>
+                                <th class="py-3 px-3">Target Wholesale Price</th>
+                                <th class="py-3 px-3 text-right">Annual Revenue Run</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                            <tr>
+                                <td class="py-3 px-3 font-bold text-teal-400">Poultry Sprint Barn</td>
+                                <td class="py-3 px-3">5,760 Broilers over 6 waves/yr<br><span class="text-slate-500 font-mono">(34,560 / yr)</span></td>
+                                <td class="py-3 px-3">ZAR 38.00 / kg<br><span class="text-slate-500">(at 1.77kg harvest)</span></td>
+                                <td class="py-3 px-3 font-mono font-bold text-right text-emerald-400">ZAR 2,324,500</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-3 font-bold text-teal-400">Swine Grower Pipeline</td>
+                                <td class="py-3 px-3">160 Pigs over 3 waves/yr<br><span class="text-slate-500 font-mono">(480 / yr)</span></td>
+                                <td class="py-3 px-3">ZAR 32.00 / kg<br><span class="text-slate-500">(at 70kg carcass)</span></td>
+                                <td class="py-3 px-3 font-mono font-bold text-right text-emerald-400">ZAR 1,075,200</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-3 font-bold text-teal-400">Organic Bio-Solids</td>
+                                <td class="py-3 px-3">Continuous digestor byproduct</td>
+                                <td class="py-3 px-3">ZAR 65.00 / 10kg processed bag</td>
+                                <td class="py-3 px-3 font-bold text-right text-amber-400">Auxiliary Cash Engine</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center border-t border-slate-800/80 pt-4 text-xs text-slate-500">
+                <span>Integrated High-Yield Biological Engine</span>
+                <span>PRESTIGE COSMIC VENTURE</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 6 -->
+        <section id="slide-6" class="slide-container slide-aspect w-full bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl relative overflow-hidden hidden flex-col justify-between p-8 md:p-12">
+            <div class="flex justify-between items-start border-b border-slate-800/80 pb-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-teal-400"></div>
+                    <span class="text-xs font-bold tracking-widest text-teal-400 uppercase">Lwandile Engineering Projects</span>
+                </div>
+                <span class="text-xs font-mono text-slate-500 font-semibold">06 / 06</span>
+            </div>
+
+            <div class="my-auto py-2">
+                <h2 class="heading-font text-2xl md:text-3xl font-bold gold-gradient-text mb-2">Sovereign Supply & Off-Take Strategy</h2>
+                <p class="text-slate-300 text-xs sm:text-sm max-w-3xl mb-6 leading-relaxed">
+                    Lwandile Engineering Projects bypasses volatile middle-man logistics by locking down direct B2B institutional relationships:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5">
+                        <div class="w-10 h-10 rounded-lg bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400 mb-3">
+                            <i data-lucide="file-text" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="heading-font text-base font-bold text-amber-400 mb-2">Direct Off-Take MoUs</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Drafting wholesale purchase agreements with regional meat processing networks inside Kinross.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5">
+                        <div class="w-10 h-10 rounded-lg bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400 mb-3">
+                            <i data-lucide="building-2" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="heading-font text-base font-bold text-amber-400 mb-2">Mining Canteens</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Securing strategic food-service provider contracts for large worker hubs in Secunda.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5">
+                        <div class="w-10 h-10 rounded-lg bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400 mb-3">
+                            <i data-lucide="users" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="heading-font text-base font-bold text-amber-400 mb-2">Precision Alliance</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Partnering with regional NPOs and Mam Dube coop retail points for municipal distribution.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex flex-wrap items-center justify-between text-xs gap-3">
+                    <div>
+                        <span class="text-slate-400">Founder & Managing Director:</span>
+                        <span class="text-teal-400 font-bold ml-1">Sipho Wiseman Khuzwayo</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-slate-300">
+                        <span class="flex items-center gap-1"><i data-lucide="mail" class="w-3.5 h-3.5 text-teal-400"></i> siphokhuzwayo12@gmail.com</span>
+                        <span class="flex items-center gap-1"><i data-lucide="linkedin" class="w-3.5 h-3.5 text-teal-400"></i> linkedin.com/in/sipho-khuzwayo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center border-t border-slate-800/80 pt-4 text-xs text-slate-500">
+                <span>Govan Mbeki Municipality Execution</span>
+                <span>PRESTIGE COSMIC VENTURE</span>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Navigation Controls Bar -->
+    <footer class="no-print w-full max-w-6xl flex justify-between items-center bg-slate-900/90 border border-slate-800 rounded-xl p-3 mt-4 backdrop-blur-md">
+        <button onclick="prevSlide()" class="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            <span>Previous</span>
+        </button>
+
+        <div class="flex items-center gap-2">
+            <span id="slide-indicator" class="text-xs font-mono font-bold text-teal-400 bg-slate-950 px-3 py-1 rounded-md border border-slate-800">
+                Slide 1 / 6
+            </span>
+        </div>
+
+        <button onclick="nextSlide()" class="flex items-center gap-2 px-4 py-2 bg-teal-500 hover:bg-teal-400 text-slate-950 text-xs font-bold rounded-lg transition">
+            <span>Next</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+        </button>
+    </footer>
+
+    <!-- Guidance Modal: How to Save Undiluted PPT -->
+    <div id="guidance-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-teal-400"></i>
+                    How to Export "Undiluted" (High-Res) Slides
+                </h3>
+                <button onclick="toggleModal()" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
+                <p><strong class="text-teal-400">"Undiluted" presentation saving</strong> ensures zero image compression, pixelation, or broken custom fonts when delivering your pitch to investors.</p>
+
+                <div class="space-y-2">
+                    <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <strong class="text-amber-400 block mb-1">Option A: Native High-Res Vector PDF (Recommended)</strong>
+                        Click <strong>"Export High-Res PDF"</strong> on the top menu bar. In the Chrome/Edge print window:
+                        <ul class="list-disc list-inside mt-1 text-slate-400 space-y-0.5">
+                            <li>Destination: <strong>Save as PDF</strong></li>
+                            <li>Layout: <strong>Landscape</strong></li>
+                            <li>Margins: <strong>None</strong></li>
+                            <li>Check: <strong>Background Graphics</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <strong class="text-amber-400 block mb-1">Option B: In Microsoft PowerPoint (.pptx)</strong>
+                        To prevent PowerPoint from compressing graphics automatically:
+                        <ol class="list-decimal list-inside mt-1 text-slate-400 space-y-0.5">
+                            <li>Go to <code>File</code> &gt; <code>Options</code> &gt; <code>Advanced</code></li>
+                            <li>Scroll to <strong>Image Size and Quality</strong></li>
+                            <li>Check <strong>"Do not compress images in file"</strong></li>
+                            <li>Set default resolution to <strong>"High fidelity" (300 ppi)</strong></li>
+                            <li>Save as <code>.pptx</code></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2 text-right">
+                <button onclick="toggleModal()" class="px-4 py-2 bg-teal-500 text-slate-950 text-xs font-bold rounded-lg hover:bg-teal-400 transition">
+                    Got it, Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        let currentSlide = 1;
+        const totalSlides = 6;
+
+        function updateSlides() {
+            for (let i = 1; i <= totalSlides; i++) {
+                const el = document.getElementById(`slide-${i}`);
+                if (el) {
+                    if (i === currentSlide) {
+                        el.classList.remove('hidden');
+                        el.classList.add('flex');
+                    } else {
+                        el.classList.add('hidden');
+                        el.classList.remove('flex');
+                    }
+                }
+            }
+            document.getElementById('slide-indicator').innerText = `Slide ${currentSlide} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        function toggleModal() {
+            const modal = document.getElementById('guidance-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Keyboard Controls
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key.toLowerCase() === 'f') {
+                toggleFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>
